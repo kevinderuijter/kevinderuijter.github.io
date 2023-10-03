@@ -1,0 +1,85 @@
+---
+layout: post
+title: Jekyll Post Snippets
+description: Create a new Jekyll post with a bash function or a VSCode snippet.
+date: 2023-10-03 12:30:41 +0000
+categories: Jekyll VSCode Snippets Shell
+---
+
+I've written a [bash function](#bash-function) and a
+[VSCode snippet](#vscode-snippet) to create a new Jekyll post.
+
+## Bash Function
+
+You could put this function in your `.bashrc` or `.zshrc` file.
+For [Fig](fig.io) users, you could add it to your Functions under Dotfiles.
+
+```bash
+# Jekyll Post Creator Alias.
+function jpc() {
+  # The title of the post.
+  title=$1
+  # The categories of the post, space separated.
+  categories=$2
+
+  # The file name with date and title.
+  file="$(date +%Y-%m-%d-)$title.md"
+
+  # If the title is empty, show usage.
+  if [[ -z $title ]]; then
+    echo "Usage: jpc <title> [categories]"
+    return 1
+  fi
+
+  # If the current directory is not "_posts", prepend it to the file.
+  if [[ $(pwd) != *"_posts"* ]]; then
+    file="_posts/$file"
+  fi
+
+  # If the file already exists, show error.
+  if [[ -f $file ]]; then
+    echo "File $file already exists"
+    return 1
+  fi
+
+  # Create the file and add the YAML front matter.
+  echo "---" >> $file
+  echo "layout: post" >> $file
+  echo "title: $title" >> $file
+  # Add the date, time and timezone.
+  echo "date: $(date "+%Y-%m-%d %H:%M:%S %z")" >> $file
+  echo "categories: $categories" >> $file
+  echo "---" >> $file
+}
+```
+
+## VSCode Snippet
+
+Make sure that you've enabled quickSuggestions for markdown in your VSCode
+`settings.json` file. Otherwise, the snippet won't work.
+For more information about VSCode snippets, see the
+[official documentation](https://code.visualstudio.com/docs/editor/userdefinedsnippets).
+
+```json
+"[markdown]": {
+    "editor.quickSuggestions": true
+}
+```
+
+```json
+{
+  "jekyll": {
+    "prefix": "jekyll",
+    "body": [
+      "---",
+      "layout: post",
+      "title: $1",
+      "date: $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE $CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND",
+      "categories: $2",
+      "---",
+      "$3"
+    ],
+    "description": "Jekyll post"
+  }
+
+```

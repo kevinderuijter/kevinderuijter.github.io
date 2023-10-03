@@ -1,0 +1,15 @@
+title: Kevin de Ruijter
+email: kevinderuijter@icloud.com
+description: >-
+  My humble GitHub Pages site.
+domain: ""
+baseurl: ""
+future: true
+url: ""
+show_excerpts: true
+github_username: kevinderuijter
+linkedin_username: kevinderuijter
+theme: minima
+plugins:
+  - "jekyll-github-metadata"
+avatar: "/assets/img/avatar.png"
