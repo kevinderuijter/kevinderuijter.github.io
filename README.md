@@ -4,14 +4,6 @@
 
 [https://github.com/kevinderuijter.gpg](https://github.com/kevinderuijter.gpg)
 
-### Digital
-Does not require physical confirmation with GPG card device.
-
-**Email Address:** [kevinderuijter@icloud.com](mailto:kevinderuijter@icloud.com)  
-**Key ID:** EA5A6B6BB53FAC05
-**Subkeys:** B0C8542195ED7040  
-_Added on May 3, 2025_
-
 ### Physical
 Requires physical confirmation with GPG card device.
 
